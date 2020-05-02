@@ -18,13 +18,12 @@ namespace OnlineShoppingStore.DB
         public string ProductName { get; set; }
         public string Description { get; set; }
         public int Quantity { get; set; }
+        public decimal Price { get; set; }
         public byte[] ProductImage { get; set; }
         public int CategoryId { get; set; }
         public bool IsActive { get; set; }
-        public Nullable<bool> IsInactive { get; set; }
         public System.DateTime DateCreated { get; set; }
         public Nullable<System.DateTime> DateModified { get; set; }
         public bool IsFeatured { get; set; }
-        public decimal Price { get; set; }
     }
 }
