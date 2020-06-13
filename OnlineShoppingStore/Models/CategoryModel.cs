@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnlineShoppingStore.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Web.Mvc;
 
 namespace OnlineShoppingStore.Models
 {
-    public class CategoryModel
+    public class CategoryModel 
     {
         public int CategoryId { get; set; }
 
@@ -16,9 +17,11 @@ namespace OnlineShoppingStore.Models
         public string CategoryName { get; set; }
         public bool IsActive { get; set; }
         public bool IsInactive { get; set; }
+        public string Message { get; set; }
+
     }
 
-    public class ProductModel
+    public class ProductModel: IProductModel
     {
         public int ProductId { get; set; }
 
@@ -45,7 +48,7 @@ namespace OnlineShoppingStore.Models
         public System.DateTime DateCreated { get; set; }
         public Nullable<System.DateTime> DateModified { get; set; }
         public bool IsFeatured { get; set; }
-
+        public string Message { get; set; }
         public SelectList Categories { get; set; }
     }
 

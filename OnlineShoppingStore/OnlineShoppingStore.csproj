@@ -222,6 +222,9 @@
     <Compile Include="DB\Product.cs">
       <DependentUpon>OnlineStoreDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\ProductImage.cs">
+      <DependentUpon>OnlineStoreDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\Role.cs">
       <DependentUpon>OnlineStoreDb.tt</DependentUpon>
     </Compile>
@@ -240,11 +243,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\ICategoryView.cs" />
+    <Compile Include="Interfaces\IProductListView.cs" />
+    <Compile Include="Interfaces\IProductModel.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CartModel.cs" />
+    <Compile Include="Models\CategoryListView.cs" />
     <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Interfaces\ICategoryListView.cs" />
+    <Compile Include="Models\CategoryView.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ProductListView.cs" />
     <Compile Include="Models\ShippingModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -733,6 +743,9 @@
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Admin\Dashboard.cshtml" />
     <Content Include="Views\Admin\Categories.cshtml" />
+    <Content Include="Views\Admin\AddCategory.cshtml" />
+    <Content Include="Views\Admin\Products.cshtml" />
+    <Content Include="Views\Admin\AddProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -12,17 +12,10 @@ namespace OnlineShoppingStore.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class ProductImage
     {
-        public int ProductId { get; set; }
-        public string ProductName { get; set; }
-        public string Description { get; set; }
-        public int Quantity { get; set; }
-        public decimal Price { get; set; }
-        public int CategoryId { get; set; }
-        public bool IsActive { get; set; }
-        public bool IsFeatured { get; set; }
-        public System.DateTime DateCreated { get; set; }
-        public Nullable<System.DateTime> DateModified { get; set; }
+        public int ProductImageId { get; set; }
+        public byte[] Product { get; set; }
+        public Nullable<int> ProductId { get; set; }
     }
 }

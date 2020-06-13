@@ -1,23 +1,20 @@
-﻿@model List<OnlineShoppingStore.DB.Category>
+﻿@model OnlineShoppingStore.Interfaces.ICategoryListView
 
 @{
     ViewBag.Title = "Categories";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var I = 0; var info = Model.CategoryCollection.Any();
 }
 
-<h2>Categories</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <div class="dashboard-wrapper">
     <div class="dashboard-ecommerce">
         <div class="container-fluid dashboard-content ">
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="page-header">
-                        <h2 class="pageheader-title">Category Details</h2>
-                        <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
+                        <h2 class="pageheader-title">Category Lists</h2>
                         <div class="page-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -27,43 +24,59 @@
                             </nav>
                         </div>
                     </div>
+                    @if (!string.IsNullOrEmpty(Model.Message))
+                    {
+                        <div class="container">
+                            <div class="alert alert-info alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="notika-icon notika-close"></i></span></button> @Model.Message
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
             <div></div>
-            <table class="table">
-                <thead class="bg-light">
-                    <tr>
-                        <th>
-                            S/N
-                        </th>
-                        <th>
-                            Category
-                        </th>
-                        <th>
-                            Action
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
+            @if (info)
+            {
+                <table class="table">
+                    <thead class="bg-light">
                         <tr>
-                            <td>
-                                @(Model.IndexOf(item) + 1)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CategoryName)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.CategoryId }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.CategoryId })
-                            </td>
+                            <th>
+                                S/N
+                            </th>
+                            <th>
+                                Category
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                            <th></th>
                         </tr>
-                    }
-                </tbody>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.CategoryCollection)
+                        {
+                            <tr>
+                                <td>
+                                    @(I += 1)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CategoryName)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.CategoryId }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.CategoryId })
+                                </td>
+                            </tr>
 
-            </table>
+                        }
+                    </tbody>
+
+                </table>
+            }
+            else
+            {
+                    <div class="container">No Category in List</div>
+            }
         </div>
     </div>
 </div>

@@ -29,6 +29,7 @@ namespace OnlineShoppingStore.DB
         public virtual DbSet<CartStatu> CartStatus { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductImage> ProductImages { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<ShippingDetail> ShippingDetails { get; set; }
         public virtual DbSet<Slide> Slides { get; set; }
