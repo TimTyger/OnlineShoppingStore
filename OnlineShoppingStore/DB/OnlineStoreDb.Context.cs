@@ -27,7 +27,6 @@ namespace OnlineShoppingStore.DB
     
         public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<CartStatu> CartStatus { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
@@ -35,5 +34,6 @@ namespace OnlineShoppingStore.DB
         public virtual DbSet<Slide> Slides { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
     }
 }

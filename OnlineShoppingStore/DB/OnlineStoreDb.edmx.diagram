@@ -7,7 +7,6 @@
       <Diagram DiagramId="b1562614f3304bcfb6d3e523787c3901" Name="Diagram1">
         <EntityTypeShape EntityType="ShoppingStoreModel.Cart" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ShoppingStoreModel.CartStatu" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShoppingStoreModel.Category" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ShoppingStoreModel.Product" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ShoppingStoreModel.ProductImage" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ShoppingStoreModel.Role" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
@@ -15,6 +14,7 @@
         <EntityTypeShape EntityType="ShoppingStoreModel.Slide" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ShoppingStoreModel.User" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ShoppingStoreModel.UserRole" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingStoreModel.Category" Width="1.5" PointX="5.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

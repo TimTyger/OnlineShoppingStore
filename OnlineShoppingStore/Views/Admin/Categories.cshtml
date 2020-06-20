@@ -63,8 +63,9 @@
                                     @Html.DisplayFor(modelItem => item.CategoryName)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.CategoryId }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.CategoryId })
+                                    @*@Html.ActionLink("Edit", "EditCategory", new { categoryId = item.CategoryId })*@
+                                    <a href="/Admin/EditCategory?categoryId=@item.CategoryId">Edit</a>
+                                    @Html.ActionLink("Delete", "Delete", new { categoryId = item.CategoryId })
                                 </td>
                             </tr>
 

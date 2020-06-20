@@ -21,6 +21,7 @@ namespace OnlineShoppingStore.Controllers
         }
 
         public ActionResult Categories(string message)
+
         {
 
             List<Category> categoryList = unitOfWork.GetRepositoryInstance<Category>().GetAllRecords().Where(i => i.IsActive == true).ToList();
@@ -67,9 +68,23 @@ namespace OnlineShoppingStore.Controllers
             return RedirectToAction("Categories", new { message });
         }
 
-        public ActionResult EditCategory()
+        public ActionResult EditCategory(int categoryId)
         {
-            return View();
+            var categoryModel = unitOfWork.GetRepositoryInstance<Category>().GetFirstorDefault(categoryId);
+            var categoryView = new CategoryView { CategoryId = categoryModel.CategoryId, CategoryName = categoryModel.CategoryName};
+            return View("EditCategory", categoryView);
+        }
+        [HttpPost]
+        public ActionResult EditCategory(CategoryView categoryModel)
+        {
+            if (categoryModel == null)
+            {
+                throw new ArgumentNullException(nameof(categoryModel));
+            }
+            var category = new Category { CategoryId = categoryModel.CategoryId, CategoryName = categoryModel.CategoryName, IsActive = true };
+            unitOfWork.GetRepositoryInstance<Category>().Update(category);
+            var message = string.Format("{0} succeessfully added", categoryModel.CategoryName);
+            return RedirectToAction("Categories", new { message });
         }
 
         public List<SelectListItem> GetCategory()
