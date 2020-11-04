@@ -17,7 +17,7 @@ namespace OnlineShoppingStore.Interfaces
 
          int Quantity { get; set; }
 
-         int Price { get; set; }
+         decimal Price { get; set; }
 
          int CategoryId { get; set; }
          bool IsActive { get; set; }

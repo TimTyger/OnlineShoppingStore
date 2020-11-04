@@ -251,7 +251,6 @@
     <Compile Include="Models\CategoryListView.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Interfaces\ICategoryListView.cs" />
-    <Compile Include="Models\CategoryView.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProductListView.cs" />

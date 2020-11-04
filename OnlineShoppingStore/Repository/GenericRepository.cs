@@ -152,7 +152,7 @@ namespace OnlineShoppingStore.Repository
 
             }
             dbset.Remove(entity);
-            //DBEntity.SaveChanges();
+            DBEntity.SaveChanges();
         }
 
         /// <summary>

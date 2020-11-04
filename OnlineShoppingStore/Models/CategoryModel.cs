@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace OnlineShoppingStore.Models
 {
-    public class CategoryModel 
+    public class CategoryModel :ICategoryView
     {
         public int CategoryId { get; set; }
 
@@ -38,7 +38,7 @@ namespace OnlineShoppingStore.Models
 
         [Required]
         [Range(typeof(decimal), "1", "999999.99", ErrorMessage = "Invalid price")]
-        public int Price { get; set; }
+        public decimal Price { get; set; }
 
         [Required]
         public byte[] ProductImage { get; set; }

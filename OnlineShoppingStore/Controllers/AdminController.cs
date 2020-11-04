@@ -21,9 +21,7 @@ namespace OnlineShoppingStore.Controllers
         }
 
         public ActionResult Categories(string message)
-
         {
-
             List<Category> categoryList = unitOfWork.GetRepositoryInstance<Category>().GetAllRecords().Where(i => i.IsActive == true).ToList();
             var List = new CategoryListView()
             {
@@ -35,12 +33,12 @@ namespace OnlineShoppingStore.Controllers
 
         public ActionResult AddCategory()
         {
-            var model = new CategoryView();
+            var model = new CategoryModel();
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult AddCategory(CategoryView categoryView)
+        public ActionResult AddCategory(CategoryModel categoryView)
         {
             if (categoryView == null)
             {
@@ -71,15 +69,24 @@ namespace OnlineShoppingStore.Controllers
         public ActionResult EditCategory(int categoryId)
         {
             var categoryModel = unitOfWork.GetRepositoryInstance<Category>().GetFirstorDefault(categoryId);
-            var categoryView = new CategoryView { CategoryId = categoryModel.CategoryId, CategoryName = categoryModel.CategoryName};
+            var categoryView = new CategoryModel { CategoryId = categoryModel.CategoryId, CategoryName = categoryModel.CategoryName};
             return View("EditCategory", categoryView);
         }
         [HttpPost]
-        public ActionResult EditCategory(CategoryView categoryModel)
+        public ActionResult EditCategory(CategoryModel categoryModel)
         {
             if (categoryModel == null)
             {
                 throw new ArgumentNullException(nameof(categoryModel));
+            }
+            var isExist = unitOfWork.GetRepositoryInstance<Category>().GetAllRecords();
+            foreach (var item in isExist)
+            {
+                if (item.CategoryName ==categoryModel.CategoryName & item.IsActive==true)
+                {
+                    var prompt = string.Format("{0} already exists", categoryModel.CategoryName);
+                    return RedirectToAction("Categories", new { message=prompt });
+                }
             }
             var category = new Category { CategoryId = categoryModel.CategoryId, CategoryName = categoryModel.CategoryName, IsActive = true };
             unitOfWork.GetRepositoryInstance<Category>().Update(category);
@@ -100,7 +107,7 @@ namespace OnlineShoppingStore.Controllers
         public ActionResult Products(string message)
         {
 
-            List<Product> productList = unitOfWork.GetRepositoryInstance<Product>().GetAllRecords().Where(i => i.IsActive == true).ToList();
+            List<Product> productList = unitOfWork.GetRepositoryInstance<Product>().GetAllRecords().ToList();
             var List = new ProductListView()
             {
                 ProductCollection = productList,
@@ -125,24 +132,50 @@ namespace OnlineShoppingStore.Controllers
             List<Product> productList = unitOfWork.GetRepositoryInstance<Product>().GetAllRecords().Where(i => i.IsActive == true).ToList();
             foreach (var item in productList)
             {
-                if (item.IsActive == false && productModel.ProductName == item.ProductName && productModel.Description ==item.Description )
-                {
-                    var model = new Product { IsActive = true,DateCreated=item.DateCreated, DateModified=DateTime.Now,Quantity=productModel.Quantity,IsFeatured = productModel.IsFeatured,Price= productModel.Price};
-                    unitOfWork.GetRepositoryInstance<Product>().Update(model);
-                    var prompt = string.Format("Product Modified Successfully");
-                    return RedirectToAction("Products", new { message = prompt });
-                }
                 if (item.IsActive == true && productModel.ProductName == item.ProductName&& productModel.Description == item.Description)
                 {
                     var prompt = string.Format("Product already exists");
-                    return RedirectToAction("Categories", new { message = prompt });
+                    return RedirectToAction("Products", new { message = prompt });
                 }
             }
             var product = new Product { IsActive = true, ProductName = productModel.ProductName,DateCreated = DateTime.Now, Quantity = productModel.Quantity, IsFeatured = productModel.IsFeatured, Price = productModel.Price};
             unitOfWork.GetRepositoryInstance<Product>().Add(product);
-            var message = string.Format("Product Created Successfully");
+            var message = string.Format("Product Added Successfully");
+            return RedirectToAction("Products", new { message });
+        }
+        public ActionResult EditProduct(int productId)
+        {
+            var productModel = unitOfWork.GetRepositoryInstance<Product>().GetFirstorDefault(productId);
+            var productView = new ProductModel { ProductId = productModel.ProductId, ProductName = productModel.ProductName, Price = productModel.Price,CategoryId=productModel.CategoryId,Description = productModel.Description,IsFeatured = productModel.IsFeatured };
+            return View("Editproduct", productView);
+        }
+        [HttpPost]
+        public ActionResult Editproduct(ProductModel productModel)
+        {
+            if (productModel == null)
+            {
+                throw new ArgumentNullException(nameof(productModel));
+            }
+            var isExist = unitOfWork.GetRepositoryInstance<Product>().GetAllRecords();
+            foreach (var item in isExist)
+            {
+                if (item.ProductName == productModel.ProductName & item.IsActive == true)
+                {
+                    var prompt = string.Format("{0} already exists", productModel.ProductName);
+                    return RedirectToAction("Products", new { message = prompt });
+                }
+            }
+            var product = new Product { IsActive = true, ProductName = productModel.ProductName, DateModified = DateTime.Now, Quantity = productModel.Quantity, IsFeatured = productModel.IsFeatured, Price = productModel.Price };
+            unitOfWork.GetRepositoryInstance<Product>().Update(product);
+            var message = string.Format("{0} succeessfully added", productModel.ProductName);
             return RedirectToAction("Products", new { message });
         }
 
+        [HttpDelete]
+        public ActionResult DeleteProduct(ProductModel product)
+        {
+            var message = string.Format("{0} deleted successfully", product.ProductName);
+            return RedirectToAction("Products", new { message });
+        }
     }
 }
